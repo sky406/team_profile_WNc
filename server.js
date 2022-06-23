@@ -53,18 +53,39 @@ let jsonData = [
 //     });
 //   });
 
+
   server.get('/:ID', (req, res) => {
     let user_id = req.params.ID;
     let userSP = "CALL `one_user`(?)";
     db.query(userSP, [user_id], (error, data, fields) => {
-        if(error){
+        if(error ){
             res.json({ ErrorMessage: error });
         }
         else{
+            if(data[0].length == 0){
+                res.json({productid: false, message: 'No users with that ID exists'});
+            }else{
             res.json(data[0]);
+            }
         }
     })
 });
+
+// server.get(“/product/:id”, (req, res) => {
+//     let productID = req.params.id;
+//     let SP = “CALL `getProductByID`(?)“;
+//     db.query(SP, [productID], (error, product) => {
+//       if (error) {
+//         res.json({productid: false, message: error});
+//       } else {
+//         if (product[0].length === 0) {
+//           res.json({productid: false, message: “No product with that ID exists”});
+//         } else {
+//           res.json({productid: true, message: “ProductID successfully”, productData: product[0]});
+//         }
+//       }
+//     });
+//   });
 
 server.listen(4400, function(){
     console.log("Node Express server is now running on port 4400");
