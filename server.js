@@ -9,10 +9,10 @@ import mysql from 'mysql';
 // Connect to the DB
 const db = mysql.createConnection({
   host: 'localhost',
-  port: 8889,
+  port: 3306,
   user: 'root',
-  password: 'root',
-  database: 'team_profile',
+  password: '',
+  database: 'project_test',
 });
 db.connect(error => {
   if (error) console.log('Sorry cannot connect to db: ', error);
